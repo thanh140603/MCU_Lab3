@@ -1,0 +1,15 @@
+../Core/Src/display.c:10:6:displayFirstLedCouple	5
+../Core/Src/display.c:39:6:displaySecondLedCouple	5
+../Core/Src/display.c:66:6:toggleLeds	5
+../Core/Src/display.c:86:6:displaySEG7_1	11
+../Core/Src/display.c:194:6:displaySEG7_2	11
+../Core/Src/display.c:299:6:enable0	1
+../Core/Src/display.c:304:6:enable1	1
+../Core/Src/display.c:309:6:enable2	1
+../Core/Src/display.c:314:6:enable3	1
+../Core/Src/display.c:318:6:enable4	1
+../Core/Src/display.c:323:6:enable5	1
+../Core/Src/display.c:327:6:showTimeDelay_First	1
+../Core/Src/display.c:336:6:showTimeDelay_Second	1
+../Core/Src/display.c:344:6:showTimeDelay1	1
+../Core/Src/display.c:349:6:showTimeDelay2	1

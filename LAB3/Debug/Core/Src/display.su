@@ -1,0 +1,15 @@
+../Core/Src/display.c:10:6:displayFirstLedCouple	16	static
+../Core/Src/display.c:39:6:displaySecondLedCouple	16	static
+../Core/Src/display.c:66:6:toggleLeds	16	static
+../Core/Src/display.c:86:6:displaySEG7_1	16	static
+../Core/Src/display.c:194:6:displaySEG7_2	16	static
+../Core/Src/display.c:299:6:enable0	8	static
+../Core/Src/display.c:304:6:enable1	8	static
+../Core/Src/display.c:309:6:enable2	8	static
+../Core/Src/display.c:314:6:enable3	8	static
+../Core/Src/display.c:318:6:enable4	8	static
+../Core/Src/display.c:323:6:enable5	8	static
+../Core/Src/display.c:327:6:showTimeDelay_First	16	static
+../Core/Src/display.c:336:6:showTimeDelay_Second	16	static
+../Core/Src/display.c:344:6:showTimeDelay1	16	static
+../Core/Src/display.c:349:6:showTimeDelay2	16	static
