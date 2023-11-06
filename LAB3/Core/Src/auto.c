@@ -8,95 +8,94 @@
 
 
 void auto_run(){
-	if (isButtonPressed(0) == 1 ){
-		HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
-		                          |EN4_Pin|EN5_Pin, GPIO_PIN_SET);
-		MODE = MODE2;
-	}
 	if(MODE == MODE1){
-		switch(firstCoupleLedAutoState){
-			case LED_INIT:
-				firstCoupleLedAutoState = RED;
+		switch(autostate){
+			case AUTO_INIT:
+				autostate = RED_GREEN;
 				setTimer(0, 100);
 				break;
-			case RED:
+			case RED_GREEN:
+				if (isButtonPressed(0) == 1 ){
+					HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+											  |EN4_Pin|EN5_Pin, GPIO_PIN_SET);
+					MODE = MODE2;
+					HAL_GPIO_WritePin(GPIOA, RED1_Pin|YELLOW1_Pin|GREEN1_Pin|RED2_Pin
+						                          |YELLOW2_Pin|GREEN2_Pin, GPIO_PIN_SET);
+					setTimer(3, 25);
+					break;
+				}
 				displayFirstLedCouple(RED);
-				if(timer_flag[0] == 1){
-					countdownFirstCoupleLed--;
-					if(countdownFirstCoupleLed == 0){
-						countdownFirstCoupleLed = greenDelay;
-						firstCoupleLedAutoState = GREEN;
-					}
-					setTimer(0, 100);
-				}
-				break;
-			case GREEN:
-				displayFirstLedCouple(GREEN);
-				if(timer_flag[0] == 1){
-					countdownFirstCoupleLed--;
-					if(countdownFirstCoupleLed == 0){
-						countdownFirstCoupleLed = yellowDelay;
-						firstCoupleLedAutoState = YELLOW;
-					}
-					setTimer(0, 100);
-				}
-				break;
-			case YELLOW:
-				displayFirstLedCouple(YELLOW);
-				if(timer_flag[0] == 1){
-					countdownFirstCoupleLed--;
-					if(countdownFirstCoupleLed == 0){
-						countdownFirstCoupleLed = redDelay;
-						firstCoupleLedAutoState = RED;
-					}
-					setTimer(0, 100);
-				}
-				break;
-			default:
-				break;
-		}
-		switch(secondCoupleLedAutoState){
-			case LED_INIT:
-				secondCoupleLedAutoState = GREEN;
-				setTimer(1, 100);
-				break;
-			case RED:
-				displaySecondLedCouple(RED);
-				if(timer_flag[1] == 1){
-					countdownSecondCoupleLed--;
-					if(countdownSecondCoupleLed == 0){
-						countdownSecondCoupleLed = greenDelay;
-						secondCoupleLedAutoState = GREEN;
-					}
-					setTimer(1, 100);
-				}
-				break;
-			case GREEN:
 				displaySecondLedCouple(GREEN);
-				if(timer_flag[1] == 1){
+				if(timer_flag[0] == 1){
+					countdownFirstCoupleLed--;
 					countdownSecondCoupleLed--;
 					if(countdownSecondCoupleLed == 0){
 						countdownSecondCoupleLed = yellowDelay;
-						secondCoupleLedAutoState = YELLOW;
+						autostate = RED_YELLOW;
 					}
-					setTimer(1, 100);
+					setTimer(0, 100);
 				}
 				break;
-			case YELLOW:
+			case RED_YELLOW:
+				if (isButtonPressed(0) == 1 ){
+					HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+											  |EN4_Pin|EN5_Pin, GPIO_PIN_SET);
+					MODE = MODE2;
+					break;
+				}
+				displayFirstLedCouple(RED);
 				displaySecondLedCouple(YELLOW);
-				if(timer_flag[1] == 1){
+				if(timer_flag[0] == 1){
+					countdownFirstCoupleLed--;
 					countdownSecondCoupleLed--;
 					if(countdownSecondCoupleLed == 0){
 						countdownSecondCoupleLed = redDelay;
-						secondCoupleLedAutoState = RED;
+						countdownFirstCoupleLed = greenDelay;
+						autostate = GREEN_RED;
 					}
-					setTimer(1, 100);
+					setTimer(0, 100);
 				}
 				break;
-			default:
+			case GREEN_RED:
+				if (isButtonPressed(0) == 1 ){
+					HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+											  |EN4_Pin|EN5_Pin, GPIO_PIN_SET);
+					MODE = MODE2;
+					break;
+				}
+				displayFirstLedCouple(GREEN);
+				displaySecondLedCouple(RED);
+				if(timer_flag[0] == 1){
+					countdownFirstCoupleLed--;
+					countdownSecondCoupleLed--;
+					if(countdownFirstCoupleLed == 0){
+						countdownFirstCoupleLed = yellowDelay;
+						autostate = YELLOW_RED;
+					}
+					setTimer(0, 100);
+				}
+				break;
+			case YELLOW_RED:
+				if (isButtonPressed(0) == 1 ){
+					HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin
+											  |EN4_Pin|EN5_Pin, GPIO_PIN_SET);
+					MODE = MODE2;
+					break;
+				}
+				displayFirstLedCouple(RED);
+				displaySecondLedCouple(GREEN);
+				if(timer_flag[0] == 1){
+					countdownFirstCoupleLed--;
+					countdownSecondCoupleLed--;
+					if(countdownFirstCoupleLed == 0){
+						countdownSecondCoupleLed = greenDelay;
+						countdownFirstCoupleLed = redDelay;
+						autostate = RED_GREEN;
+					}
+					setTimer(0, 100);
+				}
 				break;
 		}
-
 		switch(seg7AutoState){
 			case SEG_INIT:
 				seg7AutoState = FIRST;
